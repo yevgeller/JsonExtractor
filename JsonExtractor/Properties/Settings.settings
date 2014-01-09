@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JsonExtractor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OleDbConnStr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oledbConn</Value>
+    </Setting>
+    <Setting Name="OleDbQuery" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oledbquery</Value>
+    </Setting>
+    <Setting Name="lcasePropNames" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastUsedProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OdbcConnStr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">odbcconn</Value>
+    </Setting>
+    <Setting Name="OdbcQuery" Type="System.String" Scope="User">
+      <Value Profile="(Default)">odbcquery</Value>
+    </Setting>
+    <Setting Name="SqlConnStr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sqlconn</Value>
+    </Setting>
+    <Setting Name="SqlQuery" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sqlquery</Value>
+    </Setting>
+    <Setting Name="CSVFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">csvFileName</Value>
+    </Setting>
+    <Setting Name="providers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OleDbConnection;OdbcConnection;SqlConnection;Comma-separated values</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
