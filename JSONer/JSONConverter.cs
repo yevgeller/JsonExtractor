@@ -9,7 +9,7 @@ namespace JSONer
 {
     public class JSONConverter : IConvertableToJSON
     {
-        public StringBuilder ConvertValuesInDataTableToJSON(DataTable dt, bool lcasepropnames)
+        public StringBuilder ConvertValuesInDataTableToJSON(DataTable dt, bool lcasepropnames, bool proptynamesinquotes)
         {
             StringBuilder main = new StringBuilder("[");
 
@@ -32,9 +32,11 @@ namespace JSONer
                     foreach (KeyValuePair<string, string> pair in values)
                     {
                         bool convertedToIntSuccessfully = Int32.TryParse(pair.Value, out k);
-                        sb.Append("\t\"");
+                        sb.Append("\t");
+                        if(proptynamesinquotes) sb.Append("\"");
                         sb.Append(lcasepropnames ? pair.Key.ToLower() : pair.Key);
-                        sb.Append("\":");
+                        if(proptynamesinquotes) sb.Append("\"");
+                        sb.Append(":");
 
                         if (convertedToIntSuccessfully)
                             sb.Append(pair.Value);

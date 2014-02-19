@@ -28,6 +28,7 @@ namespace JsonExtractor
             txtConn.Text = Properties.Settings.Default.OleDbConnStr;
             txtQuery.Text = Properties.Settings.Default.OleDbQuery;
             chbLcasePropNames.IsChecked = Properties.Settings.Default.lcasePropNames;
+            chbProptyInQuotes.IsChecked = Properties.Settings.Default.proptyNamesInQuotes;
             providers.ItemsSource = GetProvidersFromSettings();
             providers.SelectedItem = Properties.Settings.Default.LastUsedProvider;
         }
@@ -43,7 +44,7 @@ namespace JsonExtractor
 
             OleDbConnection conn = new OleDbConnection();
             JSONer.JSONConverter jsc = new JSONer.JSONConverter();
-            txtContent.Text = jsc.ConvertValuesInDataTableToJSON(dt, (bool)chbLcasePropNames.IsChecked).ToString();
+            txtContent.Text = jsc.ConvertValuesInDataTableToJSON(dt, (bool)chbLcasePropNames.IsChecked, (bool)chbProptyInQuotes.IsChecked).ToString();
         }
 
         private DataTable PullData()
@@ -107,6 +108,7 @@ namespace JsonExtractor
             }
 
             Properties.Settings.Default.lcasePropNames = (bool)chbLcasePropNames.IsChecked;
+            Properties.Settings.Default.proptyNamesInQuotes = (bool)chbProptyInQuotes.IsChecked;
             Properties.Settings.Default.LastUsedProvider = providers.SelectedItem.ToString();
             Properties.Settings.Default.Save();
         }
@@ -163,6 +165,7 @@ namespace JsonExtractor
 
         private void providers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            selectMSAccessDatabase.Visibility = System.Windows.Visibility.Collapsed;
             List<string> allProviders = GetProvidersFromSettings();
 
             if (providers.SelectedItem.ToString().Length == 0)
@@ -180,6 +183,9 @@ namespace JsonExtractor
                 csvProviderOptions.Visibility = System.Windows.Visibility.Visible;
                 dbaseConnProviderOptions.Visibility = System.Windows.Visibility.Hidden;
             }
+
+            if (providers.SelectedItem.ToString().ToLower().IndexOf("oledb") > -1)
+                selectMSAccessDatabase.Visibility = System.Windows.Visibility.Visible;
 
             RestoreSettings();
         }
@@ -212,6 +218,23 @@ namespace JsonExtractor
         private void providers_GotFocus(object sender, RoutedEventArgs e)
         {
             SaveSettings();
+        }
+
+        private void selectMSAccessDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = ".mdb files |*.mdb|All Files (*.*)|*.*";
+
+            if (dlg.ShowDialog() == true)
+            {
+                txtConn.Text = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dlg.FileName + ";User Id=admin;Password=;";
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            txtContent.Focus();
+            txtContent.SelectionLength = txtContent.Text.Length;
         }
     }
 }

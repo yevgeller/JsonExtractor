@@ -32,5 +32,8 @@
     <Setting Name="providers" Type="System.String" Scope="User">
       <Value Profile="(Default)">OleDbConnection;OdbcConnection;SqlConnection;Comma-separated values</Value>
     </Setting>
+    <Setting Name="proptyNamesInQuotes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

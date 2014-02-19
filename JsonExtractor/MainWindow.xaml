@@ -41,7 +41,14 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="connStr:" Grid.Row="0" />
-            <TextBox x:Name="txtConn" Grid.Row="0" Grid.Column="1" Height="38" TextWrapping="Wrap" AcceptsReturn="True" />
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtConn" Height="38" TextWrapping="Wrap" AcceptsReturn="True" Grid.Column="0" />
+                <Button x:Name="selectMSAccessDatabase" Content=" .mdb" Click="selectMSAccessDatabase_Click" Width="35" Grid.Column="1" />
+            </Grid>
             <Button x:Name="clearConn" Grid.Row="0" Content="X" VerticalAlignment="Center" Grid.Column="2" Click="clearConn_Click" Width="20" Margin="0,9" />
             <TextBlock Text="query:" Grid.Row="1" />
             <TextBox x:Name="txtQuery" Grid.Row="1" Grid.Column="1" Height="38" TextWrapping="Wrap" AcceptsReturn="True" />
@@ -52,12 +59,14 @@
         <TextBox x:Name="txtContent" Grid.Row="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <ToolBar>
+                <Button Content="Select all" Margin="6,6" Click="Button_Click_2" />
                 <Button Command="Copy" Content="Copy" Margin="6,6" />
                 <Button Command="Paste" Content="Paste" Margin="6,6" />
                 <Button Content="Save results as..." Margin="6,6" Click="Button_Click_1" />
                 <Button x:Name="clearResults" Content="Clear results" Click="clearResults_Click" Margin="12,6" />
                 <Button Content="Close app" x:Name="closeButton" Click="closeButton_Click" Margin="12,6" />
                 <CheckBox Content="lowercase propty names" x:Name="chbLcasePropNames" />
+                <CheckBox Content="propty names in quotes" x:Name="chbProptyInQuotes" />
             </ToolBar>
         </StackPanel>
     </Grid>

@@ -9,7 +9,7 @@ namespace JsonExtractor.Tests
     [TestClass]
     public class JSONConverterTests
     {
-        string expected;
+        string expected, expectedProptyNamesNoQuotes;
         DataTable dt;
         JSONConverter js;
 
@@ -18,6 +18,7 @@ namespace JsonExtractor.Tests
         public void InitTest()
         {
             expected = "[{\r\n\t\"Prop1\":\"value1\",\r\n\t\"Prop2\":1\r\n},{\r\n\t\"Prop1\":\"value2\",\r\n\t\"Prop2\":2\r\n}]";
+            expectedProptyNamesNoQuotes = "[{\r\n\tProp1:\"value1\",\r\n\tProp2:1\r\n},{\r\n\tProp1:\"value2\",\r\n\tProp2:2\r\n}]";
             js = new JSONConverter();
             
             dt = new DataTable();
@@ -47,17 +48,33 @@ namespace JsonExtractor.Tests
         [TestMethod]
         public void JSONConverter_TestConversion_IgnoreCase()
         {
-            string s = js.ConvertValuesInDataTableToJSON(dt, false).ToString();
+            string s = js.ConvertValuesInDataTableToJSON(dt, false, true).ToString();
             Assert.AreEqual(s, expected);
         }
 
         [TestMethod]
         public void JSONConverter_TestConversion_HonorCase()
         {
-            string s = js.ConvertValuesInDataTableToJSON(dt, true).ToString();
+            string s = js.ConvertValuesInDataTableToJSON(dt, true, true).ToString();
             Assert.AreNotEqual(s, expected);
-            s = js.ConvertValuesInDataTableToJSON(dt, false).ToString();
+            s = js.ConvertValuesInDataTableToJSON(dt, false, true).ToString();
             Assert.AreEqual(s, expected);
+        }
+
+        [TestMethod]
+        public void JSONConverter_TestConversion_ProptyNamesInQuotes()
+        {
+            string s = js.ConvertValuesInDataTableToJSON(dt, false, true).ToString();
+            Assert.AreEqual(s, expected);
+        }
+
+        [TestMethod]
+        public void JSONConverter_TestConversion_ProptyNamesNoQuotes()
+        {
+            string s = js.ConvertValuesInDataTableToJSON(dt, true, false).ToString();
+            Assert.AreNotEqual(s, expected);
+            s = js.ConvertValuesInDataTableToJSON(dt, false, false).ToString();
+            Assert.AreEqual(s, expectedProptyNamesNoQuotes);
         }
     }
 }

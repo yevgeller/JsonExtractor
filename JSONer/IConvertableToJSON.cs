@@ -6,6 +6,6 @@ namespace JSONer
 {
     public interface IConvertableToJSON
     {
-        StringBuilder ConvertValuesInDataTableToJSON(DataTable dt, bool lcasepropnames);     
+        StringBuilder ConvertValuesInDataTableToJSON(DataTable dt, bool lcasepropnames, bool proptynamesinquotes);     
     }
 }
